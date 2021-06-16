@@ -4,8 +4,8 @@ services:
         restart: always
         build: 
             context: .
-            dockerfile: Dockerfile.nginx
+            dockerfile: Dockerfile.node
         volumes: 
-            - "./dist/TP01:/usr/share/nginx/html"
+            - "./dist/TP01:/home/node/app"
         ports: 
             - "80:80"

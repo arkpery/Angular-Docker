@@ -1,0 +1,4 @@
+FROM node:12.14.1-alpine3.9
+COPY angular-node /home/node/server
+WORKDIR /home/node/server
+CMD ["node", "index.js"]
