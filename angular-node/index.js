@@ -4,13 +4,11 @@ const fileURLToPath = require("url").URL;
 
 const middlewares = [
   (state, req, res) => {
-    const url = new URL(req.url);
-
-    if (fs.existsSync(url.pathname) &&
-      fs.statSync(url.pathname).isFile()) {
+    if (fs.existsSync(req.path) &&
+      fs.statSync(req.path).isFile()) {
       state.apply = true;
     }
-    res.end(fs.readFileSync(url.pathname));
+    res.end(fs.readFileSync(req.path));
   },
   (state, req, res) => {
     res.setHeader("Content-Type", "text/html");
