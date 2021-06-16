@@ -1,4 +1,4 @@
-FROM node:12.14.1-alpine3.9 as development
+FROM node:12.14.1-alpine3.9 as angular
 VOLUME [ "/home/node/app" ]
 WORKDIR /home/node/app
 EXPOSE 4200/tcp
@@ -6,16 +6,11 @@ COPY . .
 RUN apk add git && \
     npm install -g @angular/cli
 RUN npm install
+
+FROM angular as development
 CMD ["ng", "serve", "--host", "0.0.0.0"]
 
-
-FROM node:12.14.1-alpine3.9 as build
-VOLUME [ "/home/node/app" ]
-WORKDIR /home/node/app
-COPY . .
-RUN apk add git && \
-    npm install -g @angular/cli
-RUN npm install
+FROM angular as build
 CMD ["ng", "build"]
 
 FROM nginx as production
