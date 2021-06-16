@@ -1,14 +1,16 @@
 const http = require("http");
 const fs = require("fs");
-const fileURLToPath = require("url").URL;
 
 const middlewares = [
   (state, req, res) => {
-    if (fs.existsSync(`${__dirname}/../app${req.url}`) &&
-      fs.statSync(`${__dirname}/../app${req.url}`).isFile()) {
+    if (req.url === '/') {
+      req.url = "/index.html";
+    }
+    if (fs.existsSync(`/home/node/app${req.url}`) &&
+      fs.statSync(`/home/node/app${req.url}`).isFile()) {
       state.apply = true;
 
-      res.end(fs.readFileSync(`${__dirname}/../app${req.url}`));
+      res.end(fs.readFileSync(`/home/node/app${req.url}`));
     } else {
       state.apply = false;
     }

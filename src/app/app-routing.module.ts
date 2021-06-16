@@ -5,17 +5,17 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     {
-      path: "/home",
+      path: "home",
       component: HomeComponent
     },
     {
-      path: "/hello",
+      path: "hello",
       component: HelloWorldComponent
     },
     {
       path: "",
       pathMatch: "full",
-      redirectTo: "/home"
+      redirectTo: "home"
     }
 ];
 
