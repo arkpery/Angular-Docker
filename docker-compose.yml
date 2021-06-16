@@ -9,5 +9,3 @@ services:
             - "./dist/TP01:/usr/share/nginx/html"
         ports: 
             - "80:80"
-
-
