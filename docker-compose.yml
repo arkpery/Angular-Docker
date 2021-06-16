@@ -1,11 +1,19 @@
 version: '3.6'
 services: 
+    dev:
+        restart: always
+        build:
+            context: .
+            target: development
+        volumes: 
+            - ".:/home/node/app"
+        ports: 
+            - "4200:4200"
     prod:
         restart: always
-        build: 
+        build:    
             context: .
-            dockerfile: Dockerfile.node
-        volumes: 
-            - "./dist/TP01:/home/node/app"
+            target: production
         ports: 
             - "80:80"
+

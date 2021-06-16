@@ -1,4 +1,0 @@
-FROM node:latest
-COPY angular-node /home/node/server
-WORKDIR /home/node/server
-CMD ["node", "index.js"]
