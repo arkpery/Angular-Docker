@@ -4,25 +4,29 @@ const fileURLToPath = require("url").URL;
 
 const middlewares = [
   (state, req, res) => {
-    if (fs.existsSync(`${__dirname}/${req.path}`) &&
-      fs.statSync(`${__dirname}/${req.path}`).isFile()) {
+    if (fs.existsSync(`${__dirname}/../app${req.url}`) &&
+      fs.statSync(`${__dirname}/../app${req.url}`).isFile()) {
       state.apply = true;
+
+      res.end(fs.readFileSync(`${__dirname}/../app${req.url}`));
+    } else {
+      state.apply = false;
     }
-    res.end(fs.readFileSync(`${__dirname}/${req.path}`));
   },
   (state, req, res) => {
+    state.apply = true;
     res.setHeader("Content-Type", "text/html");
     res.end(fs.readFileSync(`/home/node/app/index.html`));
   }
 ]
 
 http.createServer((req, res) => {
-    const state = {};
+  const state = {};
 
-    for (let middleware of middlewares){
-        middleware(state, req, res);
-        if (state.apply){
-            return;
-        }
+  for (let middleware of middlewares) {
+    middleware(state, req, res);
+    if (state.apply) {
+      return;
     }
+  }
 }).listen(80);
