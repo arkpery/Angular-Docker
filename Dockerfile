@@ -11,7 +11,7 @@ FROM angular as development
 CMD ["ng", "serve", "--host", "0.0.0.0"]
 
 FROM angular as build
-CMD ["ng", "build"]
+RUN ng build
 
 FROM nginx as production
 EXPOSE 80/tcp

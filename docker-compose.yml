@@ -13,7 +13,6 @@ services:
         restart: always
         build:    
             context: .
-            target: production
         ports: 
             - "80:80"
 
